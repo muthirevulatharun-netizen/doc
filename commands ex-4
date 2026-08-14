@@ -1,0 +1,17 @@
+exp-4
+
+first, from moodle take ex-4input
+after that, take ex-4 save as java
+
+ssh localhost
+start-all.sh
+jps
+export HC=$(hadoop classpath)
+echo $HC
+avac -classpath $HC -d /home/hdoop/tharun/class/ /home/hdoop/tharun/movietags.java
+jar -cvf /home/hdoop/tharun/MT.jar -C /home/hdoop/tharun/class/ .
+hadoop fs -mkdir /tharun
+hadoop fs -mkdir /tharun/input
+hadoop fs -put /home/hdoop/tharun/Ex4input.csv /tharun/ip
+hadoop jar /home/hdoop/tharun/MT.jar MovieTags /tharun/ip/ /tharun/op
+hadoop dfs -cat /tharun/op/*
